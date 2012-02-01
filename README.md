@@ -7,3 +7,7 @@ Sorry, I can't hear you. I've got a banana in each ear.
 
 -   *leveshtein* - home-brewed implementations of the levenshtein-distance
     algorithm in PHP, python and erlag.
+
+-   *zerosum* - A stab at solving the subset-sum problem.
+
+-   *nearest-pairs* - fund the two closest pairs of a list of coordinates
