@@ -10,4 +10,4 @@ Sorry, I can't hear you. I've got a banana in each ear.
 
 -   *zerosum* - A stab at solving the subset-sum problem.
 
--   *nearest-pairs* - fund the two closest pairs of a list of coordinates
+-   *nearest-pairs* - find the two closest pairs of a list of coordinates
