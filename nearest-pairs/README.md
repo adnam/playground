@@ -30,3 +30,7 @@ distance. But these steps can also be combined to further increase speed.
 The running time would therefore be equal to that of the sorting algorithm,
 eg O(NlogN).
 
+
+**UPDATE - THIS IS WRONG**! - This method makes a false assumption.
+The correct solution would require a recursive method.
+
