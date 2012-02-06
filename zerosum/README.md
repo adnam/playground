@@ -36,21 +36,27 @@ program runs in O(N2^N) time.
 *horowitzi_sahni.py* is a faster solution to the subset-sum problem which
 was published in the "Journal of the Association for Computing Machinery"
 in 1972. It works like this:
-1. The function "subset_sum_zero()" receives a list of length N
-2.  Split the input list into two shorter lists of length ~N/2
-3.  For each list, get a list of all their subsets. Hence the list
+ 
+ 1. The function "subset_sum_zero()" receives a list of length N
+ 
+ 2.  Split the input list into two shorter lists of length ~N/2
+ 
+ 3.  For each list, get a list of all their subsets. Hence the list
         [1, 2, 3, 4, -5, 6]
     becomes the two following lists, A & B:
         A: [[1], [2], [3], [1, 2], [1, 3], [2, 3]] and 
         B: [[4], [-5], [6], [4, -5], [4, 6], [-5, 6]].
-4. For lists A & B, produce a list summing each sub list. In the above example:
+ 
+ 4. For lists A & B, produce a list summing each sub list. In the above example:
         Asum: [1, 2, 3, 3, 4, 5]
         Bsum: [4, -5, 6, -1, 10, 1]
-5. Sort list "A" by order ascending, and "B" by order descending.
+ 
+ 5. Sort list "A" by order ascending, and "B" by order descending.
         Asumsort: [1, 2, 3, 3, 4, 5]
         Bsumsort: [-5, -1, 1, 4, 6, 10]
-6. For each element in list A, progressively sum each element in list B.
-   If the result is larger than zero, skip to the next element in list A.
+    If the result is larger than zero, skip to the next element in list A.
+ 
+ 6. For each element in list A, progressively sum each element in list B.
    If the result is zero, return true.
    Otherwise, return false.
 
