@@ -42,23 +42,28 @@ in 1972. It works like this:
  2.  Split the input list into two shorter lists of length ~N/2
  
  3.  For each list, get a list of all their subsets. Hence the list
+     
         [1, 2, 3, 4, -5, 6]
-    becomes the two following lists, A & B:
-        A: [[1], [2], [3], [1, 2], [1, 3], [2, 3]] and 
-        B: [[4], [-5], [6], [4, -5], [4, 6], [-5, 6]].
+     
+     becomes the two following lists, A & B:
+        
+     - A: [[1], [2], [3], [1, 2], [1, 3], [2, 3]] and 
+     - B: [[4], [-5], [6], [4, -5], [4, 6], [-5, 6]].
  
  4. For lists A & B, produce a list summing each sub list. In the above example:
-        Asum: [1, 2, 3, 3, 4, 5]
-        Bsum: [4, -5, 6, -1, 10, 1]
+    
+    - Asum: [1, 2, 3, 3, 4, 5]
+    - Bsum: [4, -5, 6, -1, 10, 1]
  
  5. Sort list "A" by order ascending, and "B" by order descending.
-        Asumsort: [1, 2, 3, 3, 4, 5]
-        Bsumsort: [-5, -1, 1, 4, 6, 10]
+    
+    - Asumsort: [1, 2, 3, 3, 4, 5]
+    - Bsumsort: [-5, -1, 1, 4, 6, 10]
+    
     If the result is larger than zero, skip to the next element in list A.
  
  6. For each element in list A, progressively sum each element in list B.
-   If the result is zero, return true.
-   Otherwise, return false.
+    If the result is zero, return true. Otherwise, return false.
 
 This algorithm can potentially run in O(N2^(N/2)) by performing the expansion, 
 summation and sorting steps together. However as implemented the steps are 
