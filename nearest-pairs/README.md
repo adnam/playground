@@ -18,19 +18,33 @@ Notes
 of a given list and selects the pair with the shortest distance.
 
 *sorted_pairs.py* uses sorting to reach a quicker solution. First the
-list of coordinates is sorted according to x-axis coordinates and the
-distance between consecutive pairs is calculated; the shortest being 
-found. The same procedure is performed again, but this time the coordinates 
-are normalized to the y-axis. The solution is the shorter of the two
-resulting coodinate-pairs.
+list of coordinates is sorted according to x-axis and then split into
+two sets: "left" and "right" along a central pivot line.
 
-In the second solution the coordinate set is sorted and compared in three
-separate steps - two sorts and one final iteration to select the shortest
-distance. But these steps can also be combined to further increase speed.
-The running time would therefore be equal to that of the sorting algorithm,
-eg O(NlogN).
+The solution now lies in one of three posibilities:
 
+- The closest-coordinates are both contained within the left-set;
+- The closest-coordinates are both contained within the right-set;
+- The closest pair has one point in the left-set and the other point in 
+  the right set.
 
-**UPDATE - THIS IS WRONG**! - This method makes a false assumption.
-The correct solution would require a recursive method.
+So we solve for each scenario separately, and pick the closest of the 
+three. The first two possibilies can be solved recursively. If a subset 
+contains three-or-less points, we can trivially solve if using the 
+brute-force method described in *pairs.py*. The closest of the two
+we assign the mutual distance to a variable 'delta'.
+
+To find the closest pair which has a coordinate on both sides, we need 
+only consider points that lie within 'delta/2' of the central pivot.
+The function *marginal_points()* does this and returns the points
+sorted by Y-axis coordinate.
+
+Now we compare the points within this marginal set. Fortunately we need
+not compare all combinations of points, only those that lie within
+'delta' of each other, so we can traverse the marginal set in linear
+time. While traversing, we can improve our value for delta if a closer
+pair of points arises.
+
+At the end we return the closest pair found in the left-set, 
+right-set or the marginal-set.
 
