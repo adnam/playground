@@ -42,8 +42,8 @@ def split_coords(coordinates):
     into two groups along a central pivot line. Returns a tuple
     (left_list, right_list, pivot_point)"""
     pivot_point = abs(len(coordinates)/2)
-    left_list = nearest_sorted(coordinates[0:pivot_point])
-    right_list = nearest_sorted(coordinates[pivot_point:])
+    left_list = coordinates[:pivot_point]
+    right_list = coordinates[pivot_point:]
     return (left_list, right_list, pivot_point)
 
 def nearest_sorted(coordinates):
@@ -54,9 +54,11 @@ def nearest_sorted(coordinates):
         # Trivial case - three coordinates or less, use brute force
         return nearest_brute_force(coordinates)
     left, right, pivot = split_coords(coordinates)
-    dist_left = squaredist(left)
-    dist_right = squaredist(right)
-    delta, nearest_pair = (dist_left, left) if dist_left < dist_right else (dist_right, right)
+    nearest_left = nearest_sorted(left)
+    nearest_right = nearest_sorted(right)
+    dist_left = squaredist(nearest_left)
+    dist_right = squaredist(nearest_right)
+    delta, nearest_pair = (dist_left, nearest_left) if dist_left < dist_right else (dist_right, nearest_right)
     marginal = marginal_points(left, right, pivot, delta)
     for i in xrange(len(marginal)):
         A = marginal[i]
