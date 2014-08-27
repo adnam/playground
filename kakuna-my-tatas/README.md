@@ -83,3 +83,7 @@ Files
     └── README.md
 
     4 directories, 7 files
+
+The file `example.php` assumes you have the Zend Framework in your `include_path`.
+
+
