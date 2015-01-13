@@ -25,6 +25,8 @@ See "tt-rss-reader.py"
     
 See "operator-list.html"
 
+Live example: http://rawgit.com/adnam/playground/master/tft/operator-list.html
+
 ## Question 4
     
 In MySQL:
