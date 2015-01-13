@@ -1,0 +1,85 @@
+<html>
+    <head>
+    </head>
+    <body>
+        
+        <p>List of operators:</p>
+        
+        <div id="oplist">
+        </div>
+
+    </body>
+
+    <script type="text/javascript">
+
+        var oplist = [{"operator": "Singtel Singapore", "region": "Asia", "weight": 10},
+            {"operator": "Airtel India", "region": "Asia", "weight": 8},
+            {"operator": "Starhub Singapore", "region": "Asia", "weight": 9},
+            {"operator": "China Mobile China", "region": "Asia", "weight": 10},
+            {"operator": "Vodaphone Kenya", "region": "Africa", "weight": 10},
+            {"operator": "Digi Malaysia", "region": "Asia", "weight": 6},
+            {"operator": "ATT USA", "region": "US", "weight": 10},
+            {"operator": "T-Mobile USA", "region": "US", "weight": 10},
+            {"operator": "Orange France", "region": "Europe", "weight": 10},
+            {"operator": "Movistar Spain", "region": "Europe", "weight": 7},];
+        
+        var group = function(list, property){
+            var grouped = {}
+            for (var i = 0, len=list.length; i < len; i++) {
+                var item = list[i],
+                    group = item[property];
+                if (grouped[group] == undefined) {
+                    grouped[group] = [];
+                }
+                grouped[group].push(item)
+            }
+            return grouped;
+        }
+        
+        var sorted_groups = function(grouped) {
+            // First sort the group names alphabetically
+            var sorted = [],
+                sorted_keys = Object.keys(grouped).sort()
+
+            for (i in sorted_keys) {
+                var groupName = sorted_keys[i];
+                var sorted_items = grouped[groupName].sort(function(i1, i2) {
+                    var weight_diff = i2.weight - i1.weight;
+                    if (weight_diff == 0) {
+                        return i1.operator > i2.operator;
+                    }
+                    return weight_diff;
+                });
+                sorted.push([groupName, sorted_items]);
+            }
+            return sorted;
+        }
+        
+        var create_select = function (operator_list) {
+            var select = document.createElement("SELECT"),
+                currentGroup = null,
+                currentOpGroup = null;
+            var grouped_operators = group(oplist, "region");
+            var sorted_grouped = sorted_groups(grouped_operators);
+            for (i in sorted_grouped) {
+                if (sorted_grouped[i][0] != currentGroup) {
+                    currentGroup = sorted_grouped[i][0];
+                    currentOpGroup = document.createElement("OPTGROUP");
+                    currentOpGroup.label = "--- " + currentGroup + " ---";
+                    select.appendChild(currentOpGroup);
+                }
+                for (operator in sorted_grouped[i][1]) {
+                    var optElement = document.createElement("OPTION");
+                    optElement.text = sorted_grouped[i][1][operator]['operator'];
+                    currentOpGroup.appendChild(optElement);
+                }
+            }
+            return select;
+        }
+
+        operatorPulldown = create_select(oplist);
+
+        document.getElementById("oplist").appendChild(operatorPulldown);
+    </script>
+
+</html>
